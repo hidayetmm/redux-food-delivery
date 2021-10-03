@@ -1,12 +1,12 @@
-import Card from "../UI/Card";
 import classes from "./ProductItem.module.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart-slice";
-import { Button, Col } from "antd";
+import { Button, Col, Space, Typography } from "antd";
 import { restaurantActions } from "../../store/restaurants-slice";
 
 const ProductItem = ({ restaurant }) => {
   const dispatch = useDispatch();
+  const { Text } = Typography;
 
   const addToCartHandler = (restaurant, item) => {
     dispatch(cartActions.addItemToCart({ restaurant, item }));
@@ -26,8 +26,12 @@ const ProductItem = ({ restaurant }) => {
                   <h3>{restaurant.title}</h3>
                 </div>
                 <p>{restaurant.description}</p>
-                <div className={classes.price}>₼{item.price}</div>
-                <div>QTY: {item.quantity}</div>
+                <Space direction="vertical">
+                  <div className={classes.price}>₼{item.price}</div>
+                  <div>
+                    <Text strong>Quantity: {item.quantity}</Text>
+                  </div>
+                </Space>
                 <div className={classes.actions}>
                   <Button onClick={() => addToCartHandler(restaurant, item)}>
                     Add to Cart

@@ -90,6 +90,17 @@ const restaurantSlice = createSlice({
         ? existingItem.quantity--
         : (existingItem.quantity = 0);
     },
+    addItemToRestaurant(state, action) {
+      state.changed = true;
+      const { restaurant, item } = action.payload;
+      const existingRestaurant = state.restaurants.find(
+        (rest) => rest.id === restaurant.id
+      );
+      const existingItem = existingRestaurant.items.find(
+        (exItem) => item.id === exItem.id
+      );
+      existingItem.quantity++;
+    },
   },
 });
 

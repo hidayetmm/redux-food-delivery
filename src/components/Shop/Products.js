@@ -9,7 +9,7 @@ const Products = (props) => {
   return (
     <div className={classes.products}>
       <Title level={3} style={{ textAlign: "center" }}>
-        Buy your favorite products
+        Buy your favorite food
       </Title>
       <Row gutter={[24, 24]}>
         {restaurants.map((restaurant) => (

@@ -25,6 +25,12 @@ const CartItem = ({ item }) => {
   };
   const decreaseItem = () => {
     dispatch(cartActions.removeItemFromCart(item.id));
+    dispatch(
+      restaurantActions.addItemToRestaurant({
+        restaurant: { id: item.restaurantId },
+        item,
+      })
+    );
   };
 
   return (
