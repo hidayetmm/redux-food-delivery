@@ -11,8 +11,8 @@ const cartSlice = createSlice({
     },
     addItemToCart(state, action) {
       state.changed = true;
-
-      const newItem = action.payload;
+      const newItem = action.payload.item;
+      const newRestaurant = action.payload.restaurant;
       const existingItem = state.items.find((item) => item.id === newItem.id);
       if (!existingItem) {
         state.items.push({
@@ -21,6 +21,8 @@ const cartSlice = createSlice({
           quantity: 1,
           totalPrice: newItem.price,
           name: newItem.title,
+          restaurantName: newRestaurant.title,
+          restaurantId: newRestaurant.id,
         });
       } else {
         existingItem.quantity++;

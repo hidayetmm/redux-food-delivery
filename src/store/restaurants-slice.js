@@ -85,12 +85,10 @@ const restaurantSlice = createSlice({
         (rest) => rest.id === restaurant.id
       );
       existingItem.items.map((menuItem) => {
-        if (menuItem.quantity > 1) {
+        if (menuItem.quantity > 0) {
           menuItem.quantity--;
         } else {
-          existingItem.items = existingItem.items.filter(
-            (stockItem) => stockItem.id !== item.id
-          );
+          menuItem.quantity = 0;
         }
       });
     },
