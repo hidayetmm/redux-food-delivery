@@ -1,14 +1,27 @@
 import classes from "./CartItem.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart-slice";
 import { restaurantActions } from "../../store/restaurants-slice";
+import { Button } from "antd";
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
+  const restaurants = useSelector((state) => state.restaurants.restaurants);
+  const currentRestaurant = restaurants.find(
+    (restaurant) => restaurant.id === item.restaurantId
+  );
+  const currentItem = currentRestaurant.items.find(
+    (curItem) => curItem.id === item.id
+  );
 
   const increaseItem = () => {
     dispatch(cartActions.addItemToCart({ item }));
-    // dispatch(restaurantActions.removeItemFromRestaurant({ restaurant, item }));
+    dispatch(
+      restaurantActions.removeItemFromRestaurant({
+        restaurant: { id: item.restaurantId },
+        item,
+      })
+    );
   };
   const decreaseItem = () => {
     dispatch(cartActions.removeItemFromCart(item.id));
@@ -29,8 +42,16 @@ const CartItem = ({ item }) => {
           x <span>{item.quantity}</span>
         </div>
         <div className={classes.actions}>
-          <button onClick={decreaseItem}>-</button>
-          <button onClick={increaseItem}>+</button>
+          <Button type="text" onClick={decreaseItem}>
+            -
+          </Button>
+          <Button
+            type="text"
+            disabled={currentItem.quantity === 0}
+            onClick={increaseItem}
+          >
+            +
+          </Button>
         </div>
       </div>
     </li>

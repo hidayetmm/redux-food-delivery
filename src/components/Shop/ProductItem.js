@@ -12,7 +12,6 @@ const ProductItem = ({ restaurant }) => {
     dispatch(cartActions.addItemToCart({ restaurant, item }));
     dispatch(restaurantActions.removeItemFromRestaurant({ restaurant, item }));
   };
-
   const { items } = restaurant;
 
   return (
@@ -20,7 +19,7 @@ const ProductItem = ({ restaurant }) => {
       {items.map(
         (item) =>
           item.quantity !== 0 && (
-            <Col span={8}>
+            <Col span={8} key={restaurant.id + restaurant.title + item.id}>
               <div className={classes.item}>
                 <div>
                   <h2 style={{ color: "black" }}>{item.title}</h2>

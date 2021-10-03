@@ -79,18 +79,16 @@ const restaurantSlice = createSlice({
   reducers: {
     removeItemFromRestaurant(state, action) {
       state.changed = true;
-
       const { restaurant, item } = action.payload;
-      const existingItem = state.restaurants.find(
+      const existingRestaurant = state.restaurants.find(
         (rest) => rest.id === restaurant.id
       );
-      existingItem.items.map((menuItem) => {
-        if (menuItem.quantity > 0) {
-          menuItem.quantity--;
-        } else {
-          menuItem.quantity = 0;
-        }
-      });
+      const existingItem = existingRestaurant.items.find(
+        (exItem) => item.id === exItem.id
+      );
+      existingItem.quantity > 0
+        ? existingItem.quantity--
+        : (existingItem.quantity = 0);
     },
   },
 });
