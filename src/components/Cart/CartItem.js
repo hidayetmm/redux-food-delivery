@@ -17,10 +17,8 @@ const CartItem = ({ item }) => {
       <header>
         <h3>{item.name}</h3>
         <div className={classes.price}>
-          ${item.totalPrice.toFixed(2)}{" "}
-          <span className={classes.itemprice}>
-            (${item.price.toFixed(2)}/item)
-          </span>
+          AZN{item.totalPrice}{" "}
+          <span className={classes.itemprice}>(AZN{item.price}/item)</span>
         </div>
       </header>
       <div className={classes.details}>
